@@ -79,7 +79,7 @@ def summary(full_review):
             for word in words:
                 if len(joining_words) <= 30:
                     joining_words = joining_words + " " + "".join(word)
-            return joining_words + "..."
+            return joining_words.lstrip() + "..."
 
 print(summary(review_to_summarize))
 
