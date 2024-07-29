@@ -62,15 +62,23 @@ pos_neg_word_count(positive_words, negative_words)
 
 # Example: "This product is really good. I'm...",
 
-def review_summary(review):
-    if len(review) <= 30:
-        return review + "..."
-    else:
-        words = review.split()
-        if len(" ".join(words[:30])) <= 30:
-            return " ".join(words[:30]) + "..."
-        else:
-            return " ".join(words[:30 - 3]) + "..."
+review_to_summarize = "This product is really good. I'm impressed with its quality."
 
-for review in reviews:
-    print(review_summary(review))
+def summary(full_review):
+    if len(full_review) <= 30:
+        new_string = full_review[:-1]
+        if full_review.endswith("."):
+            return new_string.rstrip() + "..."
+        return full_review.rstrip() + "..."
+    else:
+        if full_review[:30 + 1].isspace():
+            return full_review[:30].rstrip() + "..."
+        else:
+            words = full_review.split()
+            joining_words = "" 
+            for word in words:
+                if len(joining_words) <= 30:
+                    joining_words = joining_words + " " + "".join(word)
+            return joining_words + "..."
+                     
+print(summary(review_to_summarize))
